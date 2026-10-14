@@ -15,8 +15,8 @@ RUN apt-get update && \
 
 WORKDIR /workspace
 
-RUN git clone 
+RUN git clone https://github.com/AdrianMTZVazquez/RCDD.git
 
 CMD ["sleep", "infinity"]
 # CMD ["/bin/bash"]
-# CMD ["python3", "RCDD_2026/main.py"]
+# CMD ["python3", "RCDD/main.py"]
