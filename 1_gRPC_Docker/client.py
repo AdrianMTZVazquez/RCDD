@@ -7,10 +7,10 @@ import grpc
 import saludo_pb2
 import saludo_pb2_grpc
 
+import socket
+
 # Nombre del contenedor servidor dentro de la red de Docker
 SERVIDOR = os.environ.get("SERVIDOR", "servidor:50051")
-
-
 def ciclo():
     canal = grpc.insecure_channel(SERVIDOR)
     stub = saludo_pb2_grpc.SaludoStub(canal)
