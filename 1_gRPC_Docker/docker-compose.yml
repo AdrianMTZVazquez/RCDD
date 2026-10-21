@@ -1,3 +1,9 @@
+x-client-base: &client-base
+  image: grpc-img
+  command: ["python3", "client.py"]
+  depends_on: [servidor]
+  networks: [grpc-net]
+
 # Dos contenedores de la misma imagen conectados por gRPC
 services:
   servidor:
@@ -8,14 +14,18 @@ services:
     command: ["python3", "server.py"]
     networks: [grpc-net]
 
-  cliente:
+  cliente-1:
+    <<: *client-base
     build: .
-    image: grpc-img
-    command: ["python3", "client.py"]
     environment:
       - SERVIDOR=servidor:50051
-    depends_on: [servidor]
-    networks: [grpc-net]
+      - CLIENTE_ID=Adrian
+  cliente-2:
+    <<: *client-base
+    build: .
+    environment:
+      - SERVIDOR=servidor:50051
+      - CLIENTE_ID=Juan
 
 networks:
   grpc-net:
